@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../Style/Popup.css'
 
 export function Popup(props) {
-    const [firstName, setFirstName] = useState(props.itemContact.firstName);
-    const [lastName, setLastName] = useState(props.itemContact.lastName);
-    const [phoneNumber, setPhoneNumber] = useState(props.itemContact.phoneNumber);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
 
+    useEffect(() => {
+        console.log(props.itemContact);
+        setFirstName(props.itemContact.firstName);
+        setLastName(props.itemContact.lastName);
+        setPhoneNumber(props.itemContact.phoneNumber);
+    }, [props.itemContact])
 
-    return (
+     return (
         <div className={props.active ? "popup_wrapper active" : 'popup_wrapper'}>
             <div className="popup_content">
                 <div className="popup_header">
@@ -15,11 +21,26 @@ export function Popup(props) {
                         Edit Contact: {firstName} {lastName}
                     </h2>
                     <p
-                        onClick={() => props.setActive(false)}
-                    >X
+                        onClick={() => {
+                            props.setActive(false)
+                            props.setEditable(null)
+                        }}
+                    >
+                        X
                     </p>
                 </div>
-                <form className="popup_form">
+                <form
+                    className="popup_form"
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        props.setChangedContact({
+                            firstName: firstName,
+                            lastName: lastName,
+                            phoneNumber: phoneNumber
+                        });
+                        props.setActive(false)
+                    }}
+                >
                     <div className="popup_photo"></div>
                     <div className="popup_info">
                         <p>
@@ -27,7 +48,7 @@ export function Popup(props) {
                         </p>
                         <input
                             type="text"
-                            defaultValue={firstName}
+                            value={firstName}
                             onChange={(event) => setFirstName(event.target.value)}
                         />
                         <p>
@@ -35,7 +56,7 @@ export function Popup(props) {
                         </p>
                         <input
                             type="text"
-                            defaultValue={lastName}
+                            value={lastName}
                             onChange={(event) => setLastName(event.target.value)}
                         />
                         <p>
@@ -43,7 +64,7 @@ export function Popup(props) {
                         </p>
                         <input
                             type="text"
-                            defaultValue={phoneNumber}
+                            value={phoneNumber}
                             onChange={(event) => setPhoneNumber(event.target.value)}
                         />
                         <button>

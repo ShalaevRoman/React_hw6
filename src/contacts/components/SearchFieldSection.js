@@ -13,7 +13,7 @@ export function SearchFieldSection(props) {
                 onChange={(event) => props.changeValue(event.target.value)}
             />
             <div className='searchField_list'>
-                {props.dataContacts.map((itemContact, index) => {
+                {props.filteredContacts.map((itemContact, index) => {
                     return (
                         <div className='searchField_item'
                             key={itemContact.phoneNumber}
@@ -41,6 +41,7 @@ export function SearchFieldSection(props) {
                                 <img
                                     src={removeButton}
                                     alt="removeButton"
+                                    onClick={() => props.removeContact(itemContact.phoneNumber)}
                                 />
                             </div>
                         </div>

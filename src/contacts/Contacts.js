@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { HeaderContacts } from './components/HeaderContacts';
 import { SearchFieldSection } from './components/SearchFieldSection';
 import { Popup } from './components/Popup'
 import './Style/Contacts.css'
 
-const initialContacts = [{
-    firstName: 'Vlad',
-    lastName: 'Krivokon',
-    phoneNumber: '0669417241'
-},
+const initialContacts = [
+    {
+        firstName: 'Vlad',
+        lastName: 'Krivokon',
+        phoneNumber: '0669417241'
+    },
     {
         firstName: 'Roman',
         lastName: 'Shalaev',
@@ -25,8 +26,7 @@ export function Contacts() {
     const [value, setValue] = useState('')
     const [popupActive, setPopupActive] = useState(false)
     const [editable, setEditable] = useState(null)
-    const [changedContact, setChangedContact] = useState({})
-
+    const [changedContact, setChangedContact] = useState(null)
 
     const filteredContacts = dataContacts.filter(contact => {
         return (contact.firstName.toLowerCase().includes(value.toLowerCase())
@@ -35,20 +35,41 @@ export function Contacts() {
         )
     });
 
+    const removeContact = (number) => {
+        setDataContacts(dataContacts.filter((contact) => contact.phoneNumber !== number))
+    }
+
+    useEffect(() => {
+        if(changedContact !== null) {
+            setDataContacts(dataContacts.map((itemContact, index) => {
+                return editable === index ? changedContact : itemContact;
+            }))
+            console.log(changedContact);
+        }
+    }, [changedContact])
+
+    console.log(dataContacts);
+    console.log(dataContacts[editable]);
     return (
         <div className='contacts-wrapper'>
             <HeaderContacts />
             <SearchFieldSection
-                dataContacts={filteredContacts}
+                filteredContacts={filteredContacts}
                 changeValue={setValue}
                 setActive={setPopupActive}
                 setEditable={setEditable}
+                removeContact={removeContact}
             />
-            <Popup
-                active={popupActive}
-                setActive={setPopupActive}
-                itemContact={dataContacts[editable]}
-            />
+            {editable !== null && (
+                <Popup
+                    active={popupActive}
+                    setActive={setPopupActive}
+                    itemContact={dataContacts[editable]}
+                    setEditable={setEditable}
+                    setChangedContact={setChangedContact}
+                    changedContact={changedContact}
+                />
+            )}
         </div>
     );
 }
