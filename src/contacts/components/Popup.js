@@ -1,24 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useReducer } from "react";
 import '../Style/Popup.css'
 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'firstName':
+            return {
+                ...state,
+                firstName: action.newValue
+            }
+        case 'lastName':
+            return {
+                ...state,
+                lastName: action.newValue
+            }
+        case 'phoneNumber':
+            return {
+                ...state,
+                phoneNumber: action.newValue
+            }
+        default: return state
+    }
+}
+
 export function Popup(props) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [state, dispatch] = useReducer(reducer, {
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        newValue: ''
+    })
+
+    const setValue = (type, newValue) => dispatch({ type: type, newValue})
+    const ref = useRef(null);
 
     useEffect(() => {
-        console.log(props.itemContact);
-        setFirstName(props.itemContact.firstName);
-        setLastName(props.itemContact.lastName);
-        setPhoneNumber(props.itemContact.phoneNumber);
-    }, [props.itemContact])
+        setValue("firstName", props.itemContact.firstName)
+        setValue("lastName", props.itemContact.lastName)
+        setValue("phoneNumber", props.itemContact.phoneNumber)
+    }, [props.itemContact]);
+
+    useEffect(() => {
+        ref.current.focus();
+    }, [props.active])
 
      return (
         <div className={props.active ? "popup_wrapper active" : 'popup_wrapper'}>
             <div className="popup_content">
                 <div className="popup_header">
                     <h2>
-                        Edit Contact: {firstName} {lastName}
+                        Edit Contact: {state.firstName} {state.lastName}
                     </h2>
                     <p
                         onClick={() => {
@@ -34,9 +64,9 @@ export function Popup(props) {
                     onSubmit={(event) => {
                         event.preventDefault();
                         props.setChangedContact({
-                            firstName: firstName,
-                            lastName: lastName,
-                            phoneNumber: phoneNumber
+                            firstName: state.firstName,
+                            lastName: state.lastName,
+                            phoneNumber: state.phoneNumber
                         });
                         props.setActive(false)
                     }}
@@ -47,25 +77,26 @@ export function Popup(props) {
                             First Name
                         </p>
                         <input
+                            ref={ref}
                             type="text"
-                            value={firstName}
-                            onChange={(event) => setFirstName(event.target.value)}
+                            value={state.firstName}
+                            onChange={(event) => setValue("firstName", event.target.value)}
                         />
                         <p>
                             Last Name
                         </p>
                         <input
                             type="text"
-                            value={lastName}
-                            onChange={(event) => setLastName(event.target.value)}
+                            value={state.lastName}
+                            onChange={(event) => setValue("lastName", event.target.value)}
                         />
                         <p>
                             Phone number
                         </p>
                         <input
                             type="text"
-                            value={phoneNumber}
-                            onChange={(event) => setPhoneNumber(event.target.value)}
+                            value={state.phoneNumber}
+                            onChange={(event) => setValue("phoneNumber", event.target.value)}
                         />
                         <button>
                             Save

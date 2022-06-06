@@ -1,5 +1,5 @@
 import React from "react";
-import '../../contacts/Style/HeaderContacts.css'
+import '../Style/HeaderContacts.css'
 
 export function HeaderContacts(props) {
     return(

@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import { HeaderContacts } from './components/HeaderContacts';
-import { SearchFieldSection } from './components/SearchFieldSection';
-import { Popup } from './components/Popup'
-import './Style/Contacts.css'
+import { ContactListSearch } from './components/ContactListSearch';
+import { Popup } from './components/Popup';
+import './Style/Contacts.css';
 
 const initialContacts = [
     {
@@ -19,14 +18,15 @@ const initialContacts = [
         firstName: 'Marina',
         lastName: 'Seliverstova',
         phoneNumber: '0958684618'
-    }]
+    }
+    ];
 
 export function Contacts() {
     const [dataContacts, setDataContacts] = useState(initialContacts);
-    const [value, setValue] = useState('')
-    const [popupActive, setPopupActive] = useState(false)
-    const [editable, setEditable] = useState(null)
-    const [changedContact, setChangedContact] = useState(null)
+    const [value, setValue] = useState('');
+    const [popupActive, setPopupActive] = useState(false);
+    const [editable, setEditable] = useState(null);
+    const [changedContact, setChangedContact] = useState(null);
 
     const filteredContacts = dataContacts.filter(contact => {
         return (contact.firstName.toLowerCase().includes(value.toLowerCase())
@@ -37,23 +37,19 @@ export function Contacts() {
 
     const removeContact = (number) => {
         setDataContacts(dataContacts.filter((contact) => contact.phoneNumber !== number))
-    }
+    };
 
     useEffect(() => {
         if(changedContact !== null) {
             setDataContacts(dataContacts.map((itemContact, index) => {
                 return editable === index ? changedContact : itemContact;
-            }))
-            console.log(changedContact);
-        }
-    }, [changedContact])
-
-    console.log(dataContacts);
-    console.log(dataContacts[editable]);
+            }));
+        };
+    }, [changedContact]);
+    
     return (
         <div className='contacts-wrapper'>
-            <HeaderContacts />
-            <SearchFieldSection
+            <ContactListSearch
                 filteredContacts={filteredContacts}
                 changeValue={setValue}
                 setActive={setPopupActive}
