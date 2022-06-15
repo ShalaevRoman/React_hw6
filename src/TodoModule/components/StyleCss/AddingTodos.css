@@ -1,0 +1,36 @@
+.addingTodosFormWrapper {
+    margin-top: 200px;
+    padding: 10px;
+    border-top: 2px solid #9A9A9A;
+}
+
+.addingTodosFormWrapper input {
+    width: 316px;
+    height: 63px;
+    border-radius: 20px;
+    border: 1px solid #959595;
+}
+
+.addingTodosFormWrapper ::placeholder {
+    font-size: 15px;
+    padding: 5px;
+    color: #BBBBBB;
+}
+
+.addingTodosFormWrapper button {
+    width: 40px;
+    height: 40px;
+    background: #6DBE75;
+    border-radius: 10px;
+    border: 1px solid white;
+    margin-left: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.addingTodosFormWrapper button:hover {
+    background: #47c756;
+    color: #ea3f3f;
+    transition: all 0.6s;
+}

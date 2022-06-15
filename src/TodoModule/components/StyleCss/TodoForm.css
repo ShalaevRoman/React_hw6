@@ -1,0 +1,32 @@
+.SearchedTodo h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    padding: 20px;
+    border-bottom: 2px solid #9A9A9A;
+}
+
+.SearchedTodo input {
+    width: 80%;
+    margin: 30px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #959595;
+}
+
+.SearchedTodo ::placeholder {
+    font-size: 10px;
+    padding: 5px;
+    color: #BBBBBB;
+}
+
+.SearchedTodo a {
+    display: block;
+    color: black;
+    padding: 10px;
+    font-size: 20px;
+}

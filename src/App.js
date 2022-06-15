@@ -1,14 +1,23 @@
-import './App.css';
-import { Contacts } from './contacts/Contacts'
 import React from "react";
-import {HeaderContacts} from "./contacts/components/HeaderContacts";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import './App.css';
+import { Contacts } from './contacts/Contacts';
+import { Todo } from './TodoModule/Todo';
+import { HomePage } from './homePage/HomePage';
+import { ErrorPage } from './errorPage/ErrorPage';
+
 
 function App() {
   return (
-    <div className="App">
-      <HeaderContacts/>
-      <Contacts/>
-    </div>
+      <Router>
+          <Switch>
+              <Route path='/' exact component={HomePage}/>
+              <Route path='/contacts' component={Contacts}/>
+              <Route path='/todo' component={Todo}/>
+              <Route path='*' component={ErrorPage}/>
+          </Switch>
+      </Router>
   );
 }
 

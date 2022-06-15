@@ -1,0 +1,19 @@
+.error_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #00d2ff, #928dab);
+}
+
+.error_wrapper h1 {
+    font-size: 2rem;
+}
+
+.error_wrapper p {
+    padding-top: 50px;
+    font-size: 20px;
+    color: black;
+}
+

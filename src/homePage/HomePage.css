@@ -1,0 +1,48 @@
+.homePage_wrapper {
+    height: 100vh;
+    background: linear-gradient(to bottom, #00d2ff, #928dab);
+    box-sizing: border-box;
+}
+
+.homePage_title {
+    font-size: 3rem;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.app_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.app_contacts,
+.app_todos {
+    height: 150px;
+    width: 400px;
+    text-align: center;
+    margin-top: 50px;
+    background: linear-gradient(to bottom, #00d2ff, #928dab);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px 3px #165082;
+    transition: all 0.7s;
+    position: relative;
+}
+
+.app_contacts h2,
+.app_todos h2 {
+    padding-top: 30px;
+    font-size: 2rem;
+}
+
+.app_contacts p,
+.app_todos p {
+    font-size: 20px;
+    padding-top: 30px;
+    color: #2b2929;
+}
+
+.app_contacts:hover,
+.app_todos:hover {
+    transform: scale(1.2);
+}

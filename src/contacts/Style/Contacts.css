@@ -1,6 +1,7 @@
 .contacts-wrapper {
-    width: 75%;
+    height: 100vh;
     margin: 0 auto;
     font-family: 'Inter', sans-serif;
     font-style: normal;
+    background: linear-gradient(to bottom, #00d2ff, #928dab);
 }

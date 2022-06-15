@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useCallback} from "react";
+
+
 import { ContactListSearch } from './components/ContactListSearch';
 import { Popup } from './components/Popup';
 import './Style/Contacts.css';
+import { HeaderContacts } from "./components/HeaderContacts";
 
 const initialContacts = [
     {
@@ -18,8 +21,18 @@ const initialContacts = [
         firstName: 'Marina',
         lastName: 'Seliverstova',
         phoneNumber: '0958684618'
+    },
+    {
+        firstName: 'Igor',
+        lastName: 'Petrov',
+        phoneNumber: '0503225789'
+    },
+    {
+        firstName: 'Kris',
+        lastName: 'Shishkina',
+        phoneNumber: '0976661236'
     }
-    ];
+];
 
 export function Contacts() {
     const [dataContacts, setDataContacts] = useState(initialContacts);
@@ -35,9 +48,9 @@ export function Contacts() {
         )
     });
 
-    const removeContact = (number) => {
+    const removeContact = useCallback((number) => {
         setDataContacts(dataContacts.filter((contact) => contact.phoneNumber !== number))
-    };
+    }, [dataContacts]);
 
     useEffect(() => {
         if(changedContact !== null) {
@@ -49,6 +62,7 @@ export function Contacts() {
     
     return (
         <div className='contacts-wrapper'>
+            <HeaderContacts/>
             <ContactListSearch
                 filteredContacts={filteredContacts}
                 changeValue={setValue}
