@@ -27,7 +27,6 @@ export function Popup(props) {
         firstName: '',
         lastName: '',
         phoneNumber: '',
-        newValue: ''
     })
 
     const setValue = (type, newValue) => dispatch({ type: type, newValue})

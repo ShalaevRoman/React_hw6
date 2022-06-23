@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useCallback} from "react";
 
-
 import { ContactListSearch } from './components/ContactListSearch';
 import { Popup } from './components/Popup';
 import './Style/Contacts.css';
-import { HeaderContacts } from "./components/HeaderContacts";
+import { HeaderContacts } from './components/HeaderContacts';
+import { AddedNewContact } from './components/AddedNewContact'
 
 const initialContacts = [
     {
@@ -63,6 +63,10 @@ export function Contacts() {
     return (
         <div className='contacts-wrapper'>
             <HeaderContacts/>
+            <AddedNewContact
+                dataContacts={dataContacts}
+                setDataContacts={setDataContacts}
+            />
             <ContactListSearch
                 filteredContacts={filteredContacts}
                 changeValue={setValue}
